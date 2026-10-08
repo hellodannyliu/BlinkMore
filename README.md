@@ -2,51 +2,85 @@
 
 ![BlinkMoreFree Screenshot](BlinkMoreFreeScreenCap.png "BlinkMoreFree")
 
+**English** | [中文](README.zh-CN.md)
+
 # BlinkMoreFree
 
-BlinkMoreFree is an open source macOS menu bar application that helps reduce eye strain by fading your screen when you stare at it for too long without blinking. Using automated eye-tracking and customized settings to encourage you to blink more.
+BlinkMoreFree is an open source menu bar application that helps reduce eye strain by fading your screen when you stare at it for too long without blinking. It uses automated eye tracking and customizable settings to encourage you to blink more.
 
-# BlinkMore
-If you like the free version consider [BlinkMore](http://oxremy.github.io/BuyBlinkMore/). Main difference: eye tracking turns on/off based on the app you are using, saving energy by only turning on for apps you choose. I like to use with text-heavy tasks like reading/research. 
+It is available for:
 
-## Requirements
+- **macOS** (the original app, in [`BlinkMore/`](BlinkMore/))
+- **Windows** (a system tray app, in [`windows/`](windows/), with English and 中文 interfaces)
 
-- macOS 14 (Sonoma) or later 
-- Uses Mac's built-in front facing camera 
+If you like the free version, consider [BlinkMore](http://oxremy.github.io/BuyBlinkMore/). The main difference: eye tracking turns on or off based on the app you are using, saving energy by only running for the apps you choose. It is well suited to text-heavy work like reading and research.
 
-## Install
-Download the BlinkMoreFree.dmg file above.
+## macOS
+
+### Requirements
+
+- macOS 14 (Sonoma) or later
+- Uses the Mac's built-in front-facing camera
+
+### Install
+
+Download `BlinkMoreFree.dmg` from this repository.
+
+### Tips for the best experience
+
+- Make sure the Mac's camera has a clear view of your eyes. Glasses at certain angles may reflect and block the camera's view.
+- Consider the camera angle. Blink detection may not work at extreme angles, such as lying in bed with the Mac on your lap.
+- BlinkMoreFree is well suited to reading and other text-heavy tasks. It does use a good amount of power.
 
 ## Windows
 
-BlinkMore also runs on 64-bit Windows 10 and Windows 11. Download [BlinkMore-Windows-x64.zip](BlinkMore-Windows-x64.zip), unzip it, and start `BlinkMore.exe`. The app stays in the system tray.
+BlinkMore runs on 64-bit Windows 10 and Windows 11. It stays in the system tray.
 
-Switch between English and 中文 from the tray menu (**语言 / Language**) or the buttons at the top of the settings window. The choice is saved.
+### Install and run
 
-Build it yourself with the .NET 8 SDK:
+1. Download [`BlinkMore-Windows-x64.zip`](BlinkMore-Windows-x64.zip) from this repository.
+2. Unzip it.
+3. Run `BlinkMore.exe`. No separate .NET install is needed.
+4. Right-click the eye icon in the system tray (bottom-right of the taskbar) to open the menu.
+
+The first launch asks whether to use the camera. You can skip it and turn eye tracking on later in the settings.
+
+### Switch language
+
+Switch between **English** and **中文** in either place. The choice is saved.
+
+- Tray menu: **Language**
+- Settings window: the buttons at the top
+
+### Settings
+
+- Time between blinks: 3 to 12 seconds
+- Fade duration: 1 to 5 seconds
+- Blink sensitivity: low, medium, or high
+- Fade color: nine colors
+- Camera selection
+
+If the screen stays faded for 6 seconds, eye tracking turns itself off so the overlay does not keep blocking you.
+
+### Build from source
+
+Install the [.NET 8 SDK](https://dotnet.microsoft.com/download/dotnet/8.0), then:
 
 ```bash
-./windows/build.sh
+./windows/build.sh          # Linux / macOS
 ```
 
-On Windows, run `windows/build.ps1`. Details are in [windows/README.md](windows/README.md).
+```powershell
+./windows/build.ps1         # Windows
+```
 
-### Windows 版
-
-64 位 Windows 10 或 Windows 11 可以直接用。下载仓库里的 [BlinkMore-Windows-x64.zip](BlinkMore-Windows-x64.zip)，解压后运行 `BlinkMore.exe`。程序会留在系统托盘里。
-
-托盘菜单的「语言」，或设置窗口顶部的 **English / 中文**，可以随时切换，选择会被记住。 
+Run the tests with `dotnet test windows/BlinkMore.sln -c Release`. More details are in [windows/README.md](windows/README.md).
 
 ## Privacy
 
-Everything happens right on your Mac—no data leaves your device or sticks around after you close the app. No accounts or personal information needed.
-
-## Tips for Best Experience 
-
-- Make sure your Mac's camera has a clear view of your eyes (heads-up: glasses at certain angles may have reflections that obstruct camera view).
-- Consider the angle of your camera. Blink detection may not work at extreme angles, like laying in bed with Mac on your lap.
-- BlinkMoreFree is perfect for text-heavy tasks like reading––just know it uses a good chunk of your Mac's power.
+Everything happens on your own computer. No data leaves your device or is kept after you close the app. No account or personal information is needed.
 
 ## Credits
 
-Made with ❤️ by [oxremy](https://github.com/oxremy) and AI (Grok/Claude)
+Made with ❤️ by [oxremy](https://github.com/oxremy) and AI (Grok/Claude).
+Windows port: see [windows/README.md](windows/README.md).

@@ -1,75 +1,87 @@
 # BlinkMore for Windows
 
-托盘程序。盯着屏幕太久不眨眼时，画面会变暗；眨一下眼就恢复。可以在 English 和中文之间切换。
+**English** | [中文](README.zh-CN.md)
 
-macOS 版仍在仓库根目录的 `BlinkMore/` 里。这里是 Windows 移植，用 .NET 8 和 Avalonia 写成，眨眼检测使用 OpenCV。
+BlinkMore for Windows is a system tray app. It uses the camera to watch whether you blink. If you stare at the screen longer than the interval you set, the screen fades; a blink brings it back right away.
 
-## 直接运行
+The macOS app in [`../BlinkMore/`](../BlinkMore/) is unchanged. This folder is the Windows port. It is written in C# with .NET 8 and Avalonia for the UI, and uses OpenCV for face and eye detection.
 
-需要 64 位 Windows 10 或 Windows 11。不需要另外安装 .NET。
+## Run the app
 
-1. 下载仓库根目录的 `BlinkMore-Windows-x64.zip`
-2. 解压
-3. 运行 `BlinkMore.exe`
-4. 在任务栏右下角的托盘图标上点右键
+Requirements: 64-bit Windows 10 or Windows 11. No separate .NET install is needed.
 
-第一次打开会询问是否使用摄像头。可以先跳过，之后在设置里再打开。
+1. Download [`../BlinkMore-Windows-x64.zip`](../BlinkMore-Windows-x64.zip) from the repository root.
+2. Unzip it.
+3. Run `BlinkMore.exe`.
+4. Right-click the tray icon in the bottom-right of the taskbar.
 
-语言在两个地方切换，效果一样：
+The first launch asks whether to use the camera. You can skip it and enable eye tracking later.
 
-- 托盘菜单里的「语言」
-- 设置窗口顶部的 English / 中文
+### Switch language
 
-## 从源码编译
+Language can be switched in two places, with the same result:
 
-安装 [.NET 8 SDK](https://dotnet.microsoft.com/download/dotnet/8.0) 或更新的 SDK。
+- Tray menu: **Language** (语言)
+- Settings window: the **English** / **中文** buttons at the top
+
+The choice is saved in `%APPDATA%\BlinkMore\settings.json`.
+
+## Build from source
+
+Install the [.NET 8 SDK](https://dotnet.microsoft.com/download/dotnet/8.0) or newer.
 
 ```bash
 ./windows/build.sh
 ```
 
-Windows 上：
+On Windows:
 
 ```powershell
 ./windows/build.ps1
 ```
 
-产物是 `dist/BlinkMore-Windows/BlinkMore.exe`（单个自包含 exe），并打包成仓库根目录的 `BlinkMore-Windows-x64.zip`。解压后还有使用说明和许可证。
+The output is a single self-contained `dist/BlinkMore-Windows/BlinkMore.exe`, which is also packaged as `BlinkMore-Windows-x64.zip` in the repository root. The zip also contains a short user guide, the app license, and the font license (`NotoSansSC-OFL.txt`). Other third-party notices are in [`THIRD-PARTY-NOTICES.md`](THIRD-PARTY-NOTICES.md).
 
-只跑测试：
+Run the unit tests:
 
 ```bash
 dotnet test windows/BlinkMore.sln -c Release
 ```
 
-界面自测（需要图形环境；Linux 上用 Xvfb）：
+Run the desktop self-test. It needs a display; on Linux it uses Xvfb:
 
 ```bash
 ./windows/self-test.sh
 ```
 
-## 它做什么
+The self-test opens the windows, switches language, saves settings, and checks the fade overlay. Screenshots are written to `self-test-output/` by default.
 
-和 macOS 版一样：
+## Features
 
-- 开启或关闭眨眼检测
-- 两次眨眼间隔：3 到 12 秒
-- 淡出时长：1 到 5 秒
-- 眨眼灵敏度：低 / 中 / 高
-- 九种淡出颜色
-- 选择摄像头
-- 画面持续变暗 6 秒后，检测会自动关闭，避免一直挡住屏幕
+Same as the macOS version:
 
-画面只在这台电脑上处理，不会上传，也不会保存。
+- Turn eye tracking on or off
+- Time between blinks: 3 to 12 seconds
+- Fade duration: 1 to 5 seconds
+- Blink sensitivity: low, medium, or high
+- Nine fade colors
+- Camera selection
+- Tracking turns itself off after 6 seconds of continuous fade
 
-## English
+Video is processed on this computer only. It is not uploaded or saved.
 
-BlinkMore for Windows is a tray app. The screen fades when you stare too long without blinking, and a blink brings it back. Switch language from the tray menu or the top of the settings window.
+## Layout
 
-The macOS app in `BlinkMore/` is unchanged. This folder is the Windows port.
+| Path | Contents |
+| --- | --- |
+| `src/BlinkMore.Core` | Settings, language catalog, blink and fade rules (no UI, unit tested) |
+| `src/BlinkMore.Vision` | Camera capture and OpenCV face/eye analysis |
+| `src/BlinkMore.App` | Avalonia tray app, settings, onboarding, fade overlay |
+| `tests/` | xUnit tests |
+| `tools/subset-font.py` | Rebuilds the embedded Noto Sans SC subset |
+| `third-party/` and `THIRD-PARTY-NOTICES.md` | Licenses for bundled assets |
 
-Unzip `BlinkMore-Windows-x64.zip` in the repository root and run `BlinkMore.exe`. No separate .NET install is required. To build from source, install the .NET 8 SDK and run `./windows/build.sh` or `windows/build.ps1`.
+## Notes
 
-![English settings](screenshots/settings-en.png)
-
-![中文设置](screenshots/settings-zh.png)
+- Chinese and English text share one font subset, `Noto Sans SC`, embedded in the app so it renders the same on any Windows install. After you change UI text, run `python3 tools/subset-font.py` with the full Noto Sans SC files available (see the script for the download location).
+- Logs go to `%APPDATA%\BlinkMore\blinkmore.log`.
