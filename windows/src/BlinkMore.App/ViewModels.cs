@@ -43,6 +43,25 @@ internal sealed class SettingsViewModel : LocalizedViewModel
     public string Tagline => T(TextKey.Tagline);
     public string LanguageLabel => T(TextKey.Language);
     public string EyeTrackingLabel => T(TextKey.EyeTracking);
+    public string AcceleratorLabel => T(TextKey.Accelerator);
+    public string CpuLabel => T(TextKey.AcceleratorCpu);
+    public string GpuLabel => T(TextKey.AcceleratorGpu);
+    public string AcceleratorHint => T(TextKey.AcceleratorHint);
+    public bool IsCpu => Controller.Settings.Accelerator == Accelerator.Cpu;
+    public bool IsGpu => Controller.Settings.Accelerator == Accelerator.Gpu;
+    public string AcceleratorStatusText
+    {
+        get
+        {
+            if (Controller.Settings.Accelerator == Accelerator.Cpu)
+                return T(TextKey.AcceleratorCpuStatus);
+            if (Controller.GpuReport.UsingGpu)
+                return Controller.Loc.Format(TextKey.AcceleratorGpuStatus, Controller.GpuReport.DeviceName ?? "");
+            if (!string.IsNullOrWhiteSpace(Controller.GpuReport.FailureDetail))
+                return Controller.Loc.Format(TextKey.AcceleratorGpuFailed, Controller.GpuReport.FailureDetail);
+            return T(TextKey.AcceleratorGpuMissing);
+        }
+    }
     public string BlinkIntervalLabel => T(TextKey.BlinkInterval);
     public string FadeDurationLabel => T(TextKey.FadeDuration);
     public string SensitivityLabel => T(TextKey.BlinkSensitivity);
@@ -157,6 +176,7 @@ internal sealed class HowItWorksViewModel : LocalizedViewModel
     public string Language => T(TextKey.HowLanguage);
     public string LanguageBody => T(TextKey.HowLanguageBody);
     public string Timeout => T(TextKey.HowTimeout);
+    public string Gpu => T(TextKey.HowGpu);
     public string CloseLabel => T(TextKey.Close);
 }
 

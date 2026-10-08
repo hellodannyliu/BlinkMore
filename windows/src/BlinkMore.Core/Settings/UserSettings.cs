@@ -10,6 +10,7 @@ public sealed class UserSettings
     public bool HasShownOnboarding { get; set; }
     public string? SelectedCameraId { get; set; }
     public AppLanguage Language { get; set; } = AppLanguage.English;
+    public Accelerator Accelerator { get; set; } = Accelerator.Cpu;
 
     public SensitivityLevel SensitivityLevel
     {

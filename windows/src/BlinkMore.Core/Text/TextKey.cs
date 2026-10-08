@@ -8,6 +8,14 @@ public static class TextKey
     public const string Tagline = "tagline";
     public const string Language = "language";
     public const string EyeTracking = "eye_tracking";
+    public const string Accelerator = "accelerator";
+    public const string AcceleratorCpu = "accelerator_cpu";
+    public const string AcceleratorGpu = "accelerator_gpu";
+    public const string AcceleratorHint = "accelerator_hint";
+    public const string AcceleratorCpuStatus = "accelerator_cpu_status";
+    public const string AcceleratorGpuStatus = "accelerator_gpu_status";
+    public const string AcceleratorGpuMissing = "accelerator_gpu_missing";
+    public const string AcceleratorGpuFailed = "accelerator_gpu_failed";
     public const string BlinkInterval = "blink_interval";
     public const string FadeDuration = "fade_duration";
     public const string BlinkSensitivity = "blink_sensitivity";
@@ -61,6 +69,7 @@ public static class TextKey
     public const string HowLanguage = "how_language";
     public const string HowLanguageBody = "how_language_body";
     public const string HowTimeout = "how_timeout";
+    public const string HowGpu = "how_gpu";
     public const string LangEn = "lang_en";
     public const string LangZh = "lang_zh";
     public const string VersionLabel = "version_label";

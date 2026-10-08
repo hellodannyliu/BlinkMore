@@ -21,5 +21,8 @@
     <EmbeddedResource Include="Assets\haarcascade_eye_tree_eyeglasses.xml">
       <LogicalName>BlinkMore.Vision.Cascades.haarcascade_eye_tree_eyeglasses.xml</LogicalName>
     </EmbeddedResource>
+    <EmbeddedResource Include="Assets\face_detection_yunet_2023mar.onnx">
+      <LogicalName>BlinkMore.Vision.Models.face_detection_yunet_2023mar.onnx</LogicalName>
+    </EmbeddedResource>
   </ItemGroup>
 </Project>
