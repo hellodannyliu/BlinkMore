@@ -1,0 +1,17 @@
+<Window xmlns="https://github.com/avaloniaui"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        x:Class="BlinkMore.OnboardingWindow"
+        Width="480"
+        Height="440"
+        CanResize="false"
+        WindowStartupLocation="CenterScreen"
+        Title="BlinkMore">
+  <StackPanel Margin="32,28" Spacing="16" VerticalAlignment="Center">
+    <Image Width="72" Height="72" HorizontalAlignment="Center" Source="avares://BlinkMore/Assets/icon_256.png"/>
+    <TextBlock x:Name="WelcomeTitle" Classes="title" HorizontalAlignment="Center" Text="{Binding Title}"/>
+    <TextBlock Classes="muted" TextAlignment="Center" Text="{Binding Body}"/>
+    <TextBlock Classes="muted" TextAlignment="Center" Text="{Binding Reason}"/>
+    <Button Classes="primary" Margin="40,12,40,0" Content="{Binding ContinueLabel}" Click="OnContinue"/>
+    <Button Classes="link" HorizontalAlignment="Center" Content="{Binding SkipLabel}" Click="OnSkip"/>
+  </StackPanel>
+</Window>

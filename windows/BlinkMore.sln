@@ -1,0 +1,57 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.0.31903.59
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{664582BB-2D41-492A-9586-162D62F16352}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BlinkMore.Core", "src\BlinkMore.Core\BlinkMore.Core.csproj", "{F7DAC139-9574-43D2-BCAE-AC4917AD7C61}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BlinkMore.Vision", "src\BlinkMore.Vision\BlinkMore.Vision.csproj", "{D955543E-A488-4448-B445-07A263C5A948}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BlinkMore.App", "src\BlinkMore.App\BlinkMore.App.csproj", "{2041BA83-5F12-42FA-8F3E-09DDFC5071F6}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "tests", "tests", "{DFBC3CE2-0AB0-4340-B92B-0A136ABD2203}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BlinkMore.Core.Tests", "tests\BlinkMore.Core.Tests\BlinkMore.Core.Tests.csproj", "{EBFB2864-EE5F-4767-8C8C-032213BD01FE}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BlinkMore.Vision.Tests", "tests\BlinkMore.Vision.Tests\BlinkMore.Vision.Tests.csproj", "{0AFCF427-BCEB-4662-9B59-D3EB7B22CC10}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{F7DAC139-9574-43D2-BCAE-AC4917AD7C61}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F7DAC139-9574-43D2-BCAE-AC4917AD7C61}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F7DAC139-9574-43D2-BCAE-AC4917AD7C61}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F7DAC139-9574-43D2-BCAE-AC4917AD7C61}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D955543E-A488-4448-B445-07A263C5A948}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D955543E-A488-4448-B445-07A263C5A948}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D955543E-A488-4448-B445-07A263C5A948}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D955543E-A488-4448-B445-07A263C5A948}.Release|Any CPU.Build.0 = Release|Any CPU
+		{2041BA83-5F12-42FA-8F3E-09DDFC5071F6}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2041BA83-5F12-42FA-8F3E-09DDFC5071F6}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2041BA83-5F12-42FA-8F3E-09DDFC5071F6}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2041BA83-5F12-42FA-8F3E-09DDFC5071F6}.Release|Any CPU.Build.0 = Release|Any CPU
+		{EBFB2864-EE5F-4767-8C8C-032213BD01FE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{EBFB2864-EE5F-4767-8C8C-032213BD01FE}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{EBFB2864-EE5F-4767-8C8C-032213BD01FE}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{EBFB2864-EE5F-4767-8C8C-032213BD01FE}.Release|Any CPU.Build.0 = Release|Any CPU
+		{0AFCF427-BCEB-4662-9B59-D3EB7B22CC10}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0AFCF427-BCEB-4662-9B59-D3EB7B22CC10}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0AFCF427-BCEB-4662-9B59-D3EB7B22CC10}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0AFCF427-BCEB-4662-9B59-D3EB7B22CC10}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{F7DAC139-9574-43D2-BCAE-AC4917AD7C61} = {664582BB-2D41-492A-9586-162D62F16352}
+		{D955543E-A488-4448-B445-07A263C5A948} = {664582BB-2D41-492A-9586-162D62F16352}
+		{2041BA83-5F12-42FA-8F3E-09DDFC5071F6} = {664582BB-2D41-492A-9586-162D62F16352}
+		{EBFB2864-EE5F-4767-8C8C-032213BD01FE} = {DFBC3CE2-0AB0-4340-B92B-0A136ABD2203}
+		{0AFCF427-BCEB-4662-9B59-D3EB7B22CC10} = {DFBC3CE2-0AB0-4340-B92B-0A136ABD2203}
+	EndGlobalSection
+EndGlobal

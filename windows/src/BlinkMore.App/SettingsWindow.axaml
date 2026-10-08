@@ -1,0 +1,110 @@
+<Window xmlns="https://github.com/avaloniaui"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        x:Class="BlinkMore.SettingsWindow"
+        Width="460"
+        Height="700"
+        CanResize="false"
+        WindowStartupLocation="CenterScreen"
+        Title="BlinkMore">
+  <DockPanel>
+    <Grid DockPanel.Dock="Bottom" ColumnDefinitions="*,Auto,Auto" ColumnSpacing="16" Margin="22,8,22,14">
+      <Button Classes="link" HorizontalAlignment="Left" VerticalAlignment="Center"
+              Content="{Binding MadeByLabel}" Click="OnMadeBy"/>
+      <Button Grid.Column="1" Classes="link" VerticalAlignment="Center"
+              Content="{Binding HowItWorksLabel}" Click="OnHowItWorks"/>
+      <TextBlock Grid.Column="2" Classes="muted" VerticalAlignment="Center" Text="{Binding VersionText}"/>
+    </Grid>
+    <Button DockPanel.Dock="Bottom" Classes="primary" Margin="22,4,22,0"
+            Content="{Binding PreviewLabel}" Click="OnPreview"/>
+  <ScrollViewer>
+    <StackPanel Margin="22,16,22,12" Spacing="8">
+      <Grid ColumnDefinitions="Auto,*" ColumnSpacing="12">
+        <Image Grid.Column="0" Width="42" Height="42" Source="avares://BlinkMore/Assets/icon_256.png"/>
+        <StackPanel Grid.Column="1" VerticalAlignment="Center" Spacing="4">
+          <TextBlock x:Name="TitleText" Classes="title" Text="{Binding Title}"/>
+          <TextBlock x:Name="TaglineText" Classes="muted" Text="{Binding Tagline}"/>
+        </StackPanel>
+      </Grid>
+
+      <StackPanel Spacing="6">
+        <TextBlock Classes="section" Text="{Binding LanguageLabel}"/>
+        <StackPanel Orientation="Horizontal" Spacing="8">
+          <Button Classes="lang" Classes.selected="{Binding IsEnglish}" Content="English" Click="OnEnglish"/>
+          <Button Classes="lang" Classes.selected="{Binding IsChinese}" Content="中文" Click="OnChinese"/>
+        </StackPanel>
+      </StackPanel>
+
+      <Grid ColumnDefinitions="*,Auto">
+        <TextBlock Classes="section" VerticalAlignment="Center" Text="{Binding EyeTrackingLabel}"/>
+        <ToggleSwitch Grid.Column="1" OnContent="" OffContent="" IsChecked="{Binding IsEyeTracking, Mode=TwoWay}"/>
+      </Grid>
+
+      <StackPanel Spacing="4">
+        <TextBlock Classes="section" Text="{Binding CameraLabel}"/>
+        <TextBlock Classes="muted" Text="{Binding NoCameraText}" IsVisible="{Binding !HasCameras}"/>
+        <ComboBox HorizontalAlignment="Stretch"
+                  IsVisible="{Binding HasCameras}"
+                  ItemsSource="{Binding Cameras}"
+                  SelectedItem="{Binding SelectedCamera, Mode=OneWay}"
+                  SelectionChanged="OnCameraChanged">
+          <ComboBox.ItemTemplate>
+            <DataTemplate>
+              <TextBlock Text="{Binding Name}"/>
+            </DataTemplate>
+          </ComboBox.ItemTemplate>
+        </ComboBox>
+      </StackPanel>
+
+      <StackPanel Spacing="2">
+        <Grid ColumnDefinitions="*,Auto">
+          <TextBlock Classes="section" Text="{Binding BlinkIntervalLabel}"/>
+          <TextBlock Grid.Column="1" Classes="value" Text="{Binding BlinkValueText}"/>
+        </Grid>
+        <Slider Minimum="3" Maximum="12" TickFrequency="1" IsSnapToTickEnabled="True"
+                Value="{Binding BlinkThreshold, Mode=TwoWay}"/>
+      </StackPanel>
+
+      <StackPanel Spacing="2">
+        <Grid ColumnDefinitions="*,Auto">
+          <TextBlock Classes="section" Text="{Binding FadeDurationLabel}"/>
+          <TextBlock Grid.Column="1" Classes="value" Text="{Binding FadeValueText}"/>
+        </Grid>
+        <Slider Minimum="1" Maximum="5" TickFrequency="1" IsSnapToTickEnabled="True"
+                Value="{Binding FadeSpeed, Mode=TwoWay}"/>
+      </StackPanel>
+
+      <StackPanel Spacing="2">
+        <Grid ColumnDefinitions="*,Auto">
+          <TextBlock Classes="section" Text="{Binding SensitivityLabel}"/>
+          <TextBlock Grid.Column="1" Classes="value" Text="{Binding SensitivityValueText}"/>
+        </Grid>
+        <Slider Minimum="0" Maximum="2" TickFrequency="1" IsSnapToTickEnabled="True"
+                Value="{Binding SensitivityIndex, Mode=TwoWay}"/>
+        <TextBlock Classes="muted" Text="{Binding SensitivityHint}"/>
+      </StackPanel>
+
+      <StackPanel Spacing="6">
+        <TextBlock Classes="section" Text="{Binding FadeColorLabel}"/>
+        <ItemsControl ItemsSource="{Binding Colors}">
+          <ItemsControl.ItemsPanel>
+            <ItemsPanelTemplate>
+              <WrapPanel/>
+            </ItemsPanelTemplate>
+          </ItemsControl.ItemsPanel>
+          <ItemsControl.ItemTemplate>
+            <DataTemplate>
+              <Button Classes="swatch"
+                      Classes.selected="{Binding IsSelected}"
+                      Background="{Binding Swatch}"
+                      Tag="{Binding Hex}"
+                      ToolTip.Tip="{Binding Name}"
+                      Click="OnColorClick"/>
+            </DataTemplate>
+          </ItemsControl.ItemTemplate>
+        </ItemsControl>
+      </StackPanel>
+
+    </StackPanel>
+  </ScrollViewer>
+  </DockPanel>
+</Window>

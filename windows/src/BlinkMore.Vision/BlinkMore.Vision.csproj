@@ -1,0 +1,25 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <TargetFramework>net8.0</TargetFramework>
+    <RootNamespace>BlinkMore.Vision</RootNamespace>
+    <AssemblyName>BlinkMore.Vision</AssemblyName>
+    <Description>Camera and face detection for BlinkMore on Windows.</Description>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\BlinkMore.Core\BlinkMore.Core.csproj" />
+    <PackageReference Include="OpenCvSharp4" Version="4.13.0.20260627" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <EmbeddedResource Include="Assets\haarcascade_frontalface_default.xml">
+      <LogicalName>BlinkMore.Vision.Cascades.haarcascade_frontalface_default.xml</LogicalName>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Assets\haarcascade_eye.xml">
+      <LogicalName>BlinkMore.Vision.Cascades.haarcascade_eye.xml</LogicalName>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Assets\haarcascade_eye_tree_eyeglasses.xml">
+      <LogicalName>BlinkMore.Vision.Cascades.haarcascade_eye_tree_eyeglasses.xml</LogicalName>
+    </EmbeddedResource>
+  </ItemGroup>
+</Project>

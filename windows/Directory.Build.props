@@ -1,0 +1,13 @@
+<Project>
+  <PropertyGroup>
+    <Version>1.1.0</Version>
+    <Nullable>enable</Nullable>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <LangVersion>12</LangVersion>
+    <Deterministic>true</Deterministic>
+    <Company>oxremy</Company>
+    <Product>BlinkMore</Product>
+    <Copyright>Copyright (c) 2025 Jeremy Knox</Copyright>
+    <NoWarn>$(NoWarn);CS9057</NoWarn>
+  </PropertyGroup>
+</Project>

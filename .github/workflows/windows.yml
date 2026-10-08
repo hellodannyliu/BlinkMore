@@ -1,0 +1,31 @@
+name: Windows
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-dotnet@v4
+        with:
+          dotnet-version: 8.0.x
+      - name: Unit tests
+        run: dotnet test windows/BlinkMore.sln -c Release
+
+  exe:
+    runs-on: windows-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-dotnet@v4
+        with:
+          dotnet-version: 8.0.x
+      - name: Publish BlinkMore.exe
+        run: ./windows/build.ps1
+      - uses: actions/upload-artifact@v4
+        with:
+          name: BlinkMore-Windows-x64
+          path: dist/BlinkMore-Windows-x64.zip

@@ -1,0 +1,155 @@
+namespace BlinkMore.Core;
+
+public static class TextCatalog
+{
+    private static readonly IReadOnlyDictionary<AppLanguage, IReadOnlyDictionary<string, string>> Tables;
+
+    static TextCatalog()
+    {
+        Tables = new Dictionary<AppLanguage, IReadOnlyDictionary<string, string>>
+        {
+            [AppLanguage.English] = English,
+            [AppLanguage.Chinese] = Chinese,
+        };
+    }
+
+    public static IReadOnlyCollection<string> Keys => English.Keys;
+
+    public static string Get(AppLanguage language, string key)
+    {
+        if (!Tables.TryGetValue(language, out var table) || !table.TryGetValue(key, out var value))
+            throw new KeyNotFoundException($"Missing text '{key}' for {language}.");
+
+        return value;
+    }
+
+    private static readonly Dictionary<string, string> English = new()
+    {
+        [TextKey.SettingsTitle] = "Settings",
+        [TextKey.Tagline] = "The screen fades when you stare too long without blinking.",
+        [TextKey.Language] = "Language",
+        [TextKey.EyeTracking] = "Eye tracking",
+        [TextKey.BlinkInterval] = "Time between blinks",
+        [TextKey.FadeDuration] = "Fade duration",
+        [TextKey.BlinkSensitivity] = "Blink sensitivity",
+        [TextKey.SensitivityHint] = "Higher sensitivity treats smaller eye closures as blinks.",
+        [TextKey.FadeColor] = "Fade color",
+        [TextKey.Camera] = "Camera",
+        [TextKey.PreviewFade] = "Preview fade",
+        [TextKey.HowItWorks] = "How it works",
+        [TextKey.Quit] = "Quit",
+        [TextKey.MadeBy] = "Made with ♥ by oxremy",
+        [TextKey.OpenSettings] = "Open Settings",
+        [TextKey.EnableTracking] = "Enable Eye Tracking",
+        [TextKey.Low] = "Low",
+        [TextKey.Med] = "Medium",
+        [TextKey.High] = "High",
+        [TextKey.Seconds] = "{0} s",
+        [TextKey.NoCamera] = "No camera detected",
+        [TextKey.CameraName] = "Camera {0}",
+        [TextKey.WelcomeTitle] = "Welcome to BlinkMore",
+        [TextKey.WelcomeBody] = "BlinkMore reduces eye strain by noticing when you are not blinking and gently fading the screen as a reminder.",
+        [TextKey.CameraReason] = "Blink detection uses your camera. Video stays on this computer and is never uploaded.",
+        [TextKey.ContinueCamera] = "Continue with Camera",
+        [TextKey.Skip] = "Skip",
+        [TextKey.CameraRequiredTitle] = "Camera access needed",
+        [TextKey.CameraRequiredBody] = "Eye tracking needs the camera. Open Windows camera privacy settings?",
+        [TextKey.OpenSystemSettings] = "Open Settings",
+        [TextKey.Cancel] = "Cancel",
+        [TextKey.CameraFailedTitle] = "Camera could not be opened",
+        [TextKey.CameraFailedBody] = "BlinkMore could not open a camera. Check that a camera is connected, then allow desktop apps to use the camera in Windows privacy settings.",
+        [TextKey.AlreadyRunning] = "BlinkMore is already running in the tray.",
+        [TextKey.Close] = "Close",
+        [TextKey.ColorBlack] = "Black",
+        [TextKey.ColorGray] = "Gray",
+        [TextKey.ColorWhite] = "White",
+        [TextKey.ColorRed] = "Red",
+        [TextKey.ColorPurple] = "Purple",
+        [TextKey.ColorBlue] = "Blue",
+        [TextKey.ColorGreen] = "Green",
+        [TextKey.ColorYellow] = "Yellow",
+        [TextKey.ColorOrange] = "Orange",
+        [TextKey.HowIntro] = "BlinkMore is an open source Windows tray app. It watches whether you blink. If you stare for longer than the interval you chose, the screen fades. A blink brings the screen back immediately.",
+        [TextKey.HowRequirements] = "Requirements",
+        [TextKey.HowReqOs] = "Windows 10 or Windows 11, 64-bit",
+        [TextKey.HowReqCamera] = "A camera that can see both eyes",
+        [TextKey.HowPrivacy] = "Privacy",
+        [TextKey.HowPrivacyBody] = "Everything happens on your computer. There is no account, and no video or personal information is sent anywhere. Camera frames are not saved after you quit.",
+        [TextKey.HowTips] = "Tips",
+        [TextKey.HowTipGlasses] = "Give the camera a clear view of both eyes. Glasses can reflect at some angles and hide your eyes.",
+        [TextKey.HowTipAngle] = "Extreme angles are harder to read, for example lying down with the computer on your lap.",
+        [TextKey.HowTipPower] = "Tracking keeps the camera on. It helps while reading, and it does use extra power.",
+        [TextKey.HowLanguage] = "Language",
+        [TextKey.HowLanguageBody] = "Switch between English and 中文 from the tray menu or the settings window. The choice is remembered.",
+        [TextKey.HowTimeout] = "If the screen stays faded for 6 seconds, eye tracking turns itself off so you are not stuck behind the overlay.",
+        [TextKey.LangEn] = "English",
+        [TextKey.LangZh] = "中文",
+        [TextKey.VersionLabel] = "Version {0}",
+        [TextKey.TrayTooltip] = "BlinkMore",
+    };
+
+    private static readonly Dictionary<string, string> Chinese = new()
+    {
+        [TextKey.SettingsTitle] = "设置",
+        [TextKey.Tagline] = "盯着屏幕太久不眨眼时，画面会轻轻变暗，提醒你眨眼。",
+        [TextKey.Language] = "语言",
+        [TextKey.EyeTracking] = "眨眼检测",
+        [TextKey.BlinkInterval] = "两次眨眼间隔",
+        [TextKey.FadeDuration] = "淡出时长",
+        [TextKey.BlinkSensitivity] = "眨眼灵敏度",
+        [TextKey.SensitivityHint] = "灵敏度越高，越容易把轻微闭眼当成一次眨眼。",
+        [TextKey.FadeColor] = "淡出颜色",
+        [TextKey.Camera] = "摄像头",
+        [TextKey.PreviewFade] = "预览淡出",
+        [TextKey.HowItWorks] = "使用说明",
+        [TextKey.Quit] = "退出",
+        [TextKey.MadeBy] = "由 oxremy 用 ♥ 制作",
+        [TextKey.OpenSettings] = "打开设置",
+        [TextKey.EnableTracking] = "启用眨眼检测",
+        [TextKey.Low] = "低",
+        [TextKey.Med] = "中",
+        [TextKey.High] = "高",
+        [TextKey.Seconds] = "{0} 秒",
+        [TextKey.NoCamera] = "未检测到摄像头",
+        [TextKey.CameraName] = "摄像头 {0}",
+        [TextKey.WelcomeTitle] = "欢迎使用 BlinkMore",
+        [TextKey.WelcomeBody] = "BlinkMore 会在你长时间不眨眼时让屏幕轻轻变暗，提醒你放松眼睛。",
+        [TextKey.CameraReason] = "检测眨眼需要使用摄像头。画面只在这台电脑上处理，不会上传。",
+        [TextKey.ContinueCamera] = "允许摄像头并继续",
+        [TextKey.Skip] = "跳过",
+        [TextKey.CameraRequiredTitle] = "需要摄像头权限",
+        [TextKey.CameraRequiredBody] = "眨眼检测需要摄像头。是否打开 Windows 的摄像头隐私设置？",
+        [TextKey.OpenSystemSettings] = "打开系统设置",
+        [TextKey.Cancel] = "取消",
+        [TextKey.CameraFailedTitle] = "无法打开摄像头",
+        [TextKey.CameraFailedBody] = "没有打开摄像头。请确认摄像头已连接，并在 Windows 隐私设置中允许桌面应用使用摄像头。",
+        [TextKey.AlreadyRunning] = "BlinkMore 已在系统托盘中运行。",
+        [TextKey.Close] = "关闭",
+        [TextKey.ColorBlack] = "黑色",
+        [TextKey.ColorGray] = "灰色",
+        [TextKey.ColorWhite] = "白色",
+        [TextKey.ColorRed] = "红色",
+        [TextKey.ColorPurple] = "紫色",
+        [TextKey.ColorBlue] = "蓝色",
+        [TextKey.ColorGreen] = "绿色",
+        [TextKey.ColorYellow] = "黄色",
+        [TextKey.ColorOrange] = "橙色",
+        [TextKey.HowIntro] = "BlinkMore 是一个开源的 Windows 托盘程序。它用摄像头观察你有没有眨眼。如果盯着屏幕的时间超过你设置的间隔，画面会变暗；只要眨一下眼，画面会立刻恢复。",
+        [TextKey.HowRequirements] = "运行要求",
+        [TextKey.HowReqOs] = "64 位 Windows 10 或 Windows 11",
+        [TextKey.HowReqCamera] = "一个能看清双眼的摄像头",
+        [TextKey.HowPrivacy] = "隐私",
+        [TextKey.HowPrivacyBody] = "所有处理都在你的电脑上完成。不需要账号，也不会把画面或个人信息发送出去。退出程序后不会留下摄像头画面。",
+        [TextKey.HowTips] = "使用建议",
+        [TextKey.HowTipGlasses] = "让摄像头看清双眼。某些角度下，眼镜反光会挡住眼睛。",
+        [TextKey.HowTipAngle] = "角度太偏时不容易判断，比如躺着把电脑放在腿上。",
+        [TextKey.HowTipPower] = "检测会一直使用摄像头。阅读时很有用，也会多耗一些电。",
+        [TextKey.HowLanguage] = "语言",
+        [TextKey.HowLanguageBody] = "可以在托盘菜单或设置窗口里随时切换 English 和中文，选择会被记住。",
+        [TextKey.HowTimeout] = "如果画面持续变暗达到 6 秒，眨眼检测会自动关闭，避免画面一直挡住你。",
+        [TextKey.LangEn] = "English",
+        [TextKey.LangZh] = "中文",
+        [TextKey.VersionLabel] = "版本 {0}",
+        [TextKey.TrayTooltip] = "BlinkMore",
+    };
+}

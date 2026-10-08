@@ -1,0 +1,30 @@
+<Window xmlns="https://github.com/avaloniaui"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        x:Class="BlinkMore.HowItWorksWindow"
+        Width="520"
+        Height="560"
+        CanResize="true"
+        WindowStartupLocation="CenterScreen"
+        Title="{Binding Title}">
+  <DockPanel Margin="22">
+    <Button DockPanel.Dock="Bottom" Classes="primary" HorizontalAlignment="Right"
+            MinWidth="96" Margin="0,16,0,0" Content="{Binding CloseLabel}" Click="OnClose"/>
+    <ScrollViewer>
+      <StackPanel Spacing="10">
+        <TextBlock x:Name="IntroText" Classes="title" FontSize="18" TextWrapping="Wrap" Text="{Binding Intro}"/>
+        <TextBlock Classes="section" Margin="0,8,0,0" Text="{Binding Requirements}"/>
+        <TextBlock Classes="muted" Text="{Binding ReqOs}"/>
+        <TextBlock Classes="muted" Text="{Binding ReqCamera}"/>
+        <TextBlock Classes="section" Margin="0,8,0,0" Text="{Binding Privacy}"/>
+        <TextBlock Classes="muted" Text="{Binding PrivacyBody}"/>
+        <TextBlock Classes="section" Margin="0,8,0,0" Text="{Binding Tips}"/>
+        <TextBlock Classes="muted" Text="{Binding TipGlasses}"/>
+        <TextBlock Classes="muted" Text="{Binding TipAngle}"/>
+        <TextBlock Classes="muted" Text="{Binding TipPower}"/>
+        <TextBlock Classes="section" Margin="0,8,0,0" Text="{Binding Language}"/>
+        <TextBlock Classes="muted" Text="{Binding LanguageBody}"/>
+        <TextBlock Classes="muted" Margin="0,8,0,0" Text="{Binding Timeout}"/>
+      </StackPanel>
+    </ScrollViewer>
+  </DockPanel>
+</Window>

@@ -15,7 +15,27 @@ If you like the free version consider [BlinkMore](http://oxremy.github.io/BuyBli
 - Uses Mac's built-in front facing camera 
 
 ## Install
-Download the BlinkMoreFree.dmg file above. 
+Download the BlinkMoreFree.dmg file above.
+
+## Windows
+
+BlinkMore also runs on 64-bit Windows 10 and Windows 11. Download [BlinkMore-Windows-x64.zip](BlinkMore-Windows-x64.zip), unzip it, and start `BlinkMore.exe`. The app stays in the system tray.
+
+Switch between English and 中文 from the tray menu (**语言 / Language**) or the buttons at the top of the settings window. The choice is saved.
+
+Build it yourself with the .NET 8 SDK:
+
+```bash
+./windows/build.sh
+```
+
+On Windows, run `windows/build.ps1`. Details are in [windows/README.md](windows/README.md).
+
+### Windows 版
+
+64 位 Windows 10 或 Windows 11 可以直接用。下载仓库里的 [BlinkMore-Windows-x64.zip](BlinkMore-Windows-x64.zip)，解压后运行 `BlinkMore.exe`。程序会留在系统托盘里。
+
+托盘菜单的「语言」，或设置窗口顶部的 **English / 中文**，可以随时切换，选择会被记住。 
 
 ## Privacy
 
