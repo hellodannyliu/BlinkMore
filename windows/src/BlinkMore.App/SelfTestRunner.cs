@@ -30,6 +30,13 @@ internal static class SelfTestRunner
                 Require(settings.TitleDisplayed == "设置", "Chinese title was '" + settings.TitleDisplayed + "'.");
                 Require(settings.TaglineDisplayed.Contains('眨', StringComparison.Ordinal),
                     "Chinese tagline was '" + settings.TaglineDisplayed + "'.");
+                Require(settings.AcceleratorDisplayed == "处理方式",
+                    "Accelerator label was '" + settings.AcceleratorDisplayed + "'.");
+                controller.SetAccelerator(Accelerator.Gpu);
+                Require(settings.AcceleratorStatusDisplayed.Contains("CPU", StringComparison.Ordinal)
+                        || settings.AcceleratorStatusDisplayed.Contains("Intel", StringComparison.Ordinal),
+                    "GPU status was '" + settings.AcceleratorStatusDisplayed + "'.");
+                controller.SetAccelerator(Accelerator.Cpu);
                 Require(tray.MenuHeaders.Contains("退出"), "Tray menu was not rebuilt in Chinese.");
                 SaveShot(settings, Path.Combine(directory, "settings-zh.png"));
 
@@ -61,6 +68,7 @@ internal static class SelfTestRunner
                 Require(reloaded.FadeColorHex == "#E63333", "Saved color was " + reloaded.FadeColorHex);
                 Require(Math.Abs(reloaded.BlinkThresholdSeconds - 8) < 0.01, "Saved blink threshold was not 8.");
                 Require(reloaded.SensitivityLevel == SensitivityLevel.High, "Saved sensitivity was not high.");
+                Require(reloaded.Accelerator == Accelerator.Cpu, "Saved accelerator was " + reloaded.Accelerator);
 
                 controller.Overlay.Apply(Avalonia.Media.Colors.Red, TimeSpan.Zero, immediate: true);
                 Require(controller.Overlay.IsOverlayVisible, "Fade overlay did not show.");

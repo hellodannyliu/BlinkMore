@@ -71,6 +71,7 @@ public static class SettingsStore
         public bool HasShownOnboarding { get; set; }
         public string? SelectedCameraId { get; set; }
         public string Language { get; set; } = "en";
+        public string Accelerator { get; set; } = "cpu";
 
         public UserSettings ToSettings() => new()
         {
@@ -82,6 +83,7 @@ public static class SettingsStore
             HasShownOnboarding = HasShownOnboarding,
             SelectedCameraId = SelectedCameraId,
             Language = AppLanguageExtensions.FromCode(Language),
+            Accelerator = IntelGraphics.Parse(Accelerator),
         };
 
         public static SettingsFile From(UserSettings settings) => new()
@@ -94,6 +96,7 @@ public static class SettingsStore
             HasShownOnboarding = settings.HasShownOnboarding,
             SelectedCameraId = settings.SelectedCameraId,
             Language = settings.Language.ToCode(),
+            Accelerator = IntelGraphics.ToCode(settings.Accelerator),
         };
     }
 }

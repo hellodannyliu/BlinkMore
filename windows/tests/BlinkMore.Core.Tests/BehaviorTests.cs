@@ -85,6 +85,18 @@ public class SettingsTests
         Assert.Equal("1", loaded.SelectedCameraId);
         Assert.True(loaded.EyeTrackingEnabled);
         Assert.True(loaded.HasShownOnboarding);
+        Assert.Equal(Accelerator.Cpu, loaded.Accelerator);
+    }
+
+    [Fact]
+    public void GpuChoiceIsSaved()
+    {
+        var path = Path.Combine(Path.GetTempPath(), "blinkmore-tests", Guid.NewGuid().ToString("n"), "settings.json");
+        var settings = UserSettings.CreateDefault(AppLanguage.English);
+        settings.Accelerator = Accelerator.Gpu;
+        SettingsStore.Save(settings, path);
+        Assert.Equal(Accelerator.Gpu, SettingsStore.Load(path).Accelerator);
+        Assert.Equal(Accelerator.Cpu, IntelGraphics.Parse("nope"));
     }
 
     [Fact]
@@ -235,6 +247,55 @@ public class FadeMonitorTests
             BlinkThreshold = TimeSpan.FromSeconds(6),
             FadeTimeout = TimeSpan.FromSeconds(6),
         };
+    }
+}
+
+public class IntelGraphicsTests
+{
+    [Fact]
+    public void PrefersIrisXeOverUhdAndIgnoresOtherVendors()
+    {
+        var devices = new[]
+        {
+            new OpenClGpu("NVIDIA CUDA", "NVIDIA", "NVIDIA GeForce RTX 3060"),
+            new OpenClGpu("Intel(R) OpenCL", "Intel", "Intel(R) UHD Graphics 630"),
+            new OpenClGpu("Intel(R) OpenCL HD Graphics", "Intel(R) Corporation", "Intel(R) Iris(R) Xe Graphics"),
+        };
+
+        var picked = IntelGraphics.Prefer(devices);
+        Assert.NotNull(picked);
+        Assert.Contains("Iris", picked!.Device);
+        Assert.Equal("Intel:GPU:Iris", IntelGraphics.OpenCvDeviceVariable(picked));
+    }
+
+    [Fact]
+    public void NoIntelGpuMeansCpuStaysInCharge()
+    {
+        var devices = new[]
+        {
+            new OpenClGpu("NVIDIA CUDA", "NVIDIA", "NVIDIA GeForce"),
+        };
+        Assert.Null(IntelGraphics.Prefer(devices));
+    }
+}
+
+public class LetterboxTests
+{
+    [Fact]
+    public void WebcamFrameKeepsItsShapeInsideTheModelSquare()
+    {
+        var box = Letterbox.Fit(640, 480, 320);
+        Assert.Equal(320, box.Width);
+        Assert.Equal(240, box.Height);
+        Assert.Equal(0, box.X);
+        Assert.Equal(40, box.Y);
+
+        var mapped = box.TryMapToSource(10, 50, 100, 80, 640, 480, out var x, out var y, out var width, out var height);
+        Assert.True(mapped);
+        Assert.Equal(20, x);
+        Assert.Equal(20, y);
+        Assert.Equal(200, width);
+        Assert.Equal(160, height);
     }
 }
 

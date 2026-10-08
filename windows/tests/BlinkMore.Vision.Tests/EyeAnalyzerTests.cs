@@ -27,3 +27,14 @@ public class EyeAnalyzerTests : IDisposable
 
     public void Dispose() => _analyzer.Dispose();
 }
+
+public class YuNetModelTests
+{
+    [Fact]
+    public void CpuModelRejectsABlankFrame()
+    {
+        using var detector = YunetFaceDetector.CreateCpu();
+        using var frame = new Mat(YunetFaceDetector.InputSize, YunetFaceDetector.InputSize, MatType.CV_8UC3, Scalar.All(0));
+        Assert.Empty(detector.Detect(frame));
+    }
+}

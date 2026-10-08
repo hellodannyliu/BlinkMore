@@ -13,8 +13,8 @@ public sealed class CameraEyeTracker : IDisposable
     private Task? _task;
     private bool _disposed;
 
-    public CameraEyeTracker()
-        : this(new EyeAnalyzer(CascadeFiles.Extract()))
+    public CameraEyeTracker(bool useGpu = false)
+        : this(EyeAnalyzer.Create(useGpu))
     {
     }
 
@@ -143,7 +143,8 @@ public sealed class CameraEyeTracker : IDisposable
                 }
 
                 frameIndex++;
-                if (frameIndex % 2 != 0)
+                var interval = _analyzer.UsingGpu ? 1 : 2;
+                if (frameIndex % interval != 0)
                     continue;
 
                 var sample = _analyzer.Analyze(frame, sensitivity());

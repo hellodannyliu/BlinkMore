@@ -2,7 +2,7 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         x:Class="BlinkMore.HowItWorksWindow"
         Width="520"
-        Height="560"
+        Height="620"
         CanResize="true"
         WindowStartupLocation="CenterScreen"
         Title="{Binding Title}">
@@ -24,6 +24,7 @@
         <TextBlock Classes="section" Margin="0,8,0,0" Text="{Binding Language}"/>
         <TextBlock Classes="muted" Text="{Binding LanguageBody}"/>
         <TextBlock Classes="muted" Margin="0,8,0,0" Text="{Binding Timeout}"/>
+        <TextBlock Classes="muted" Text="{Binding Gpu}"/>
       </StackPanel>
     </ScrollViewer>
   </DockPanel>

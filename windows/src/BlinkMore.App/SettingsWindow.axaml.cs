@@ -25,6 +25,8 @@ internal partial class SettingsWindow : Window
 
     public string TitleDisplayed => TitleText.Text ?? "";
     public string TaglineDisplayed => TaglineText.Text ?? "";
+    public string AcceleratorDisplayed => AcceleratorText.Text ?? "";
+    public string AcceleratorStatusDisplayed => AcceleratorStatusText.Text ?? "";
 
     protected override void OnClosed(EventArgs e)
     {
@@ -44,6 +46,10 @@ internal partial class SettingsWindow : Window
 
         _model.Rebuild();
     }
+
+    private void OnCpu(object? sender, RoutedEventArgs e) => _controller.SetAccelerator(Core.Accelerator.Cpu);
+
+    private void OnGpu(object? sender, RoutedEventArgs e) => _controller.SetAccelerator(Core.Accelerator.Gpu);
 
     private void OnEnglish(object? sender, RoutedEventArgs e) => _controller.SetLanguage(Core.AppLanguage.English);
 

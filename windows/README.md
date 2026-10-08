@@ -26,6 +26,10 @@ Language can be switched in two places, with the same result:
 
 The choice is saved in `%APPDATA%\BlinkMore\settings.json`.
 
+### CPU or Intel graphics
+
+Under **Processing**, choose **CPU only** or **Intel graphics**. Intel graphics uses the processor's integrated GPU through OpenCL, and prefers Iris Xe when that adapter is present (11th-generation Core processors such as the i5-1155G7 include Intel Iris Xe). Face detection then runs on that GPU. Deciding whether the eyes are open stays on the CPU, on the small face region only. If the Intel GPU cannot start, BlinkMore says so and keeps detecting faces on the CPU.
+
 ## Build from source
 
 Install the [.NET 8 SDK](https://dotnet.microsoft.com/download/dotnet/8.0) or newer.

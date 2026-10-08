@@ -29,6 +29,9 @@ internal sealed class AppController : IDisposable
         Overlay = new FadeOverlay();
         _monitor.BlinkThreshold = TimeSpan.FromSeconds(settings.BlinkThresholdSeconds);
         _monitor.FadeTimeout = TimeSpan.FromSeconds(AppConstants.FadeTimeoutSeconds);
+        GpuReport = settings.Accelerator == Accelerator.Gpu
+            ? GpuSupport.Probe()
+            : AcceleratorReport.Cpu();
     }
 
     public UserSettings Settings { get; }
@@ -38,6 +41,7 @@ internal sealed class AppController : IDisposable
     public bool EyesOpen => _eyesOpen;
     public IReadOnlyList<CameraDevice> Cameras => _cameras;
     public string Version { get; } = typeof(AppController).Assembly.GetName().Version?.ToString(3) ?? "1.1.0";
+    public AcceleratorReport GpuReport { get; private set; }
 
     public event Action? DisplayChanged;
     public event Action? TrackingChanged;
@@ -90,6 +94,20 @@ internal sealed class AppController : IDisposable
         Save();
         if (_monitor.IsFaded)
             Overlay.Apply(ParseColor(), TimeSpan.Zero, immediate: true);
+        DisplayChanged?.Invoke();
+    }
+
+    public void SetAccelerator(Accelerator accelerator)
+    {
+        Settings.Accelerator = accelerator;
+        Save();
+        GpuReport = accelerator == Accelerator.Gpu
+            ? GpuSupport.Probe()
+            : AcceleratorReport.Cpu();
+        Log.Info(GpuReport.UsingGpu
+            ? "Face detection on " + GpuReport.DeviceName
+            : "Face detection on CPU. " + (GpuReport.FailureDetail ?? ""));
+        RestartTrackerIfRunning();
         DisplayChanged?.Invoke();
     }
 
@@ -206,9 +224,19 @@ internal sealed class AppController : IDisposable
 
     private CameraEyeTracker Tracker => _tracker ??= CreateTracker();
 
+    private void RestartTrackerIfRunning()
+    {
+        var running = _tracker?.IsRunning ?? false;
+        _tracker?.Dispose();
+        _tracker = null;
+        if (running && Settings.EyeTrackingEnabled)
+            Tracker.Start(Settings.SelectedCameraId, () => Settings.SensitivityLevel);
+    }
+
     private CameraEyeTracker CreateTracker()
     {
-        var tracker = new CameraEyeTracker();
+        var useGpu = Settings.Accelerator == Accelerator.Gpu && GpuReport.UsingGpu;
+        var tracker = new CameraEyeTracker(useGpu);
         tracker.Sampled += sample =>
         {
             lock (_sampleGate)

@@ -26,6 +26,10 @@ macOS 版位于 [`../BlinkMore/`](../BlinkMore/)，没有改动。本目录是 W
 
 选择会保存在 `%APPDATA%\BlinkMore\settings.json` 中。
 
+### 用 CPU 还是 Intel 核显
+
+在 **处理方式** 中选择 **仅 CPU** 或 **Intel 核显**。Intel 核显通过 OpenCL 使用处理器里的集成显卡；如果有 Iris Xe，会优先用它（11 代酷睿，例如 i5-1155G7，自带 Intel Iris Xe）。选中之后，人脸检测在这块核显上运行。眼睛是否睁开仍由 CPU 判断，而且只处理脸部那一小块画面。如果 Intel 核显无法启动，程序会说明原因，并继续在 CPU 上检测人脸。
+
 ## 从源码编译
 
 先安装 [.NET 8 SDK](https://dotnet.microsoft.com/download/dotnet/8.0) 或更新的版本。

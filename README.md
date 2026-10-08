@@ -49,6 +49,10 @@ The first launch asks whether to use the camera. You can skip it and turn eye tr
 
 Switch between **English** and **中文** in either place. The choice is saved.
 
+### CPU or Intel graphics
+
+Face detection can run on the CPU or on Intel graphics built into the processor, including Iris Xe (for example an 11th-generation Core i5-1155G7). Choose **CPU only** or **Intel graphics** under Processing in the settings window. Eye open/closed detection stays on the CPU either way. If no Intel GPU is available, BlinkMore keeps using the CPU and says so.
+
 - Tray menu: **Language**
 - Settings window: the buttons at the top
 
